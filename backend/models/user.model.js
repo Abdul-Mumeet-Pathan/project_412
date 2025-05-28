@@ -14,25 +14,27 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    password:{
-        type:String,
-        required:true,
+    password: {
+        type: String,
+        required: true,
     },
-    role:{
-        type:String,
-        enum:['student','recruiter'],
-        required:true
+    role: {
+        type: String,
+        enum: ['student', 'recruiter'],
+        required: true
     },
-    profile:{
-        bio:{type:String},
-        skills:[{type:String}],
-        resume:{type:String}, // URL to resume file
-        resumeOriginalName:{type:String},
-        company:{type:mongoose.Schema.Types.ObjectId, ref:'Company'}, 
-        profilePhoto:{
-            type:String,
-            default:""
+    profile: {
+        bio: { type: String },
+        skills: [{ type: String }],
+        resume: { type: String }, // Can be either file path or URL
+        resumeOriginalName: { type: String },
+        isResumeAUrl: { type: Boolean, default: false }, // New field to distinguish
+        company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
+        profilePhoto: {
+            type: String,
+            default: ""
         }
     },
-},{timestamps:true});
+}, { timestamps: true });
+
 export const User = mongoose.model('User', userSchema);
